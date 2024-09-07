@@ -1,0 +1,26 @@
+name: Selenium Scraping
+
+on:
+  schedule:
+    - cron: '0 * * * *' # This runs the script every hour
+  workflow_dispatch: # Allows manual triggering
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out this repo
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: |
+        pip install selenium webdriver-manager
+
+    - name: Run the scraping script
+      run: python Selenium/main.py
